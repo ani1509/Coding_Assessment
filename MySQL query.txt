@@ -1,0 +1,8 @@
+SELECT CONCAT(c.first_name, ' ', c.last_name) AS full_name 
+FROM customers c
+JOIN orders o ON o.customer_id = c.id
+JOIN order_items oi ON oi.order_id = o.id
+WHERE c.country = 'singapore'
+  AND YEAR(o.order_date) = 2023
+GROUP BY c.id, c.first_name, c.last_name
+HAVING COUNT(oi.product_id) > 5;
